@@ -1,87 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | [Challenge Name Here]</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Frontend Mentor | [Challenge Name Here]</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container" :class="{dark:darkMode, light:!darkMode}">
+      <div class="top-bg-pattern"></div>
+      <div class="top-and-bottom">
+        <div class="top division-part">
+          <div class="container-header smd-container-header">
+            <div class="container-header-texts">
+              <div class="container-title">
+                <p>Social Media Dashboard</p>
+              </div>
+              <div class="total-followers">
+                <p>Total Followers: 23,004</p>
+              </div>
+            </div>
+            <hr />
+            <div class="mode-container">
+              <div class="mode-switch-container" @click="changeToggleMode()">
+                <div class="toggle"></div>
+              </div>
+              <p>Dark Mode</p>
+            </div>
+          </div>
+          <div class="dashboard-items-container">
+            <div
+              class="dashboard-item-container item"
+              v-for="item in socialMediaDashboardData"
+            >
+              <div
+                class="dashboard-item-top-line"
+                :style="{background: item.borderColor}"
+              ></div>
+              <div class="dashboard-item">
+                <div class="dashboard-item-top">
+                  <img :src="item.icon" class="social-media-icon" />
+                  <div class="main-text-color">{{item.user}}</div>
+                </div>
+                <div class="numOfFollowers main-number-color">
+                  {{item.numOfFollowers}}
+                </div>
+                <p class="followers-text main-text-color">Followers</p>
+                <div class="progress-container">
+                  <img
+                    :src="item.progress?'./images/icon-up.svg':'./images/icon-down.svg'"
+                    class="progress-image"
+                  />
+                  <div
+                    class="today-text"
+                    :style="{color: item.progress? 'hsl(163, 72%, 41%)':'hsl(356, 69%, 56%)'}"
+                  >
+                    {{item.today}} Today
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom division-part">
+          <div class="container-header overview-container-header">
+            <div class="container-title">
+              <p>Overview - Today</p>
+            </div>
+          </div>
+          <div class="overview-items-container">
+            <div
+              class="overview-item-container item"
+              v-for="item in overviewItems"
+            >
+              <div class="overview-item">
+                <div class="overview-item-top">
+                  <div class="main-text-color">{{item.title}}</div>
+                  <img :src="item.icon" />
+                </div>
+                <div class="overview-item-bottom">
+                  <div class="overview-number main-number-color">
+                    {{item.number}}
+                  </div>
+                  <div class="progress-container overview-progress-container">
+                    <img
+                      :src="item.progress?'./images/icon-up.svg':'./images/icon-down.svg'"
+                      class="progress-image"
+                    />
+                    <div
+                      class="today-text"
+                      :style="{color: item.progress? 'hsl(163, 72%, 41%)':'hsl(356, 69%, 56%)'}"
+                    >
+                      {{item.progressNumber}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
+  <script>
+    var app = new Vue({
+      el: ".container",
+      data: {
+        socialMediaDashboardData: [
+          {
+            user: "@nathanf",
+            numOfFollowers: 1987,
+            progress: true,
+            today: 12,
+            icon: "./images/icon-facebook.svg",
+            borderColor: "hsl(208, 92%, 53%)",
+          },
+          {
+            user: "@nathanf",
+            numOfFollowers: 1044,
+            progress: true,
+            today: 99,
+            icon: "./images/icon-twitter.svg",
+            borderColor: "hsl(203, 89%, 53%)",
+          },
+          {
+            user: "@realnathanf",
+            numOfFollowers: "11k",
+            progress: true,
+            today: 1099,
+            icon: "./images/icon-instagram.svg",
+            borderColor:
+              "linear-gradient(90deg,hsl(37, 97%, 70%), hsl(329, 70%, 58%))",
+          },
+          {
+            user: "Nathan F.",
+            numOfFollowers: "8239",
+            progress: false,
+            today: 144,
+            icon: "./images/icon-youtube.svg",
+            borderColor: "hsl(348, 97%, 39%)",
+          },
+        ],
+        overviewItems: [
+          {
+            title: "Page Views",
+            number: "87",
+            progressNumber: "3%",
+            progress: true,
+            icon: "./images/icon-facebook.svg",
+          },
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+          {
+            title: "Likes",
+            number: "52",
+            progressNumber: "2%",
+            progress: false,
+            icon: "./images/icon-facebook.svg",
+          },
+          {
+            title: "Likes",
+            number: "5462",
+            progressNumber: "2257%",
+            progress: true,
+            icon: "./images/icon-instagram.svg",
+          },
 
-  Social Media Dashboard
-  Total Followers: 23,004
+          {
+            title: "Profile Views",
+            number: "52k",
+            progressNumber: "1375%",
+            progress: true,
+            icon: "./images/icon-instagram.svg",
+          },
 
-  Dark Mode
-
-  
-
-  @nathanf
-  1987
-  Followers
-  12 Today
-
-  @nathanf
-  1044
-  Followers
-  99 Today
-
-  @realnathanf
-  11k
-  Followers
-  1099 Today
-
-  Nathan F.
-  8239
-  Subscribers
-  144 Today
-
-
-
-  Overview - Today
-
-  Page Views
-  87
-  3%
-
-  Likes
-  52
-  2%
-
-  Likes
-  5462
-  2257%
-
-  Profile Views
-  52k
-  1375%
-
-  Retweets
-  117
-  303%
-
-  Likes
-  507
-  553%
-
-  Likes
-  107
-  19%
-
-  Total Views
-  1407
-  12%
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+          {
+            title: "Retweets",
+            number: "117",
+            progressNumber: "303%",
+            progress: true,
+            icon: "./images/icon-twitter.svg",
+          },
+          {
+            title: "Likes",
+            number: "507",
+            progressNumber: "553%",
+            progress: true,
+            icon: "./images/icon-twitter.svg",
+          },
+          {
+            title: "Likes",
+            number: "107",
+            progressNumber: "19%",
+            progress: false,
+            icon: "./images/icon-youtube.svg",
+          },
+          {
+            title: "Likes",
+            number: "1407",
+            progressNumber: "12%",
+            progress: false,
+            icon: "./images/icon-youtube.svg",
+          },
+        ],
+        darkMode: true,
+      },
+      methods: {
+        changeToggleMode() {
+          console.log("clicked");
+          this.darkMode = !this.darkMode;
+        },
+      },
+    });
+  </script>
 </html>
