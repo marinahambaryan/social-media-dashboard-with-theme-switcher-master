@@ -54,6 +54,7 @@ hr {
 
 .top-and-bottom {
   width: 90%;
+  max-width: 1440px;
   position: relative;
   bottom: 200px;
 }
@@ -171,7 +172,7 @@ hr {
 .dashboard-items-container {
   display: grid;
   grid-gap: 25px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .item {
